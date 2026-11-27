@@ -314,8 +314,11 @@
     introBackBtn.addEventListener("click", (e) => {
         e.stopPropagation(); // Prevents the screen-click transition immediately
 
-        if (window.location.href.includes("?skip=1")) {
-            window.location.replace("/index.html");
+        const url = new URL(window.location.href);
+
+        if (url.searchParams.has("skip")) {
+            url.searchParams.delete("skip");
+            window.location.replace(url.toString());
         }
 
         // Restart the bg music
