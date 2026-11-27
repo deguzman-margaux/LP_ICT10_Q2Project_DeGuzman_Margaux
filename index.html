@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- A lot of the codes here were found on google like the music looping, transitions, how to make a picture a button, and others -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.7.3/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2026.7.3/core.js"></script>
+
+    <script>
+        if (window.location.search.includes("skip=1")) {
+            document.documentElement.classList.add("skip-intro");
+        }
+    </script>
+
+    <link rel="preload" as="image" href="sekai.png">
+
+    <title>Project Sekai</title>
+
+    <link rel="icon" type="image/x-icon" href="logo.png">
+
+   <style>
+        @view-transition {
+            navigation: auto;
+        }
+
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000000;
+        }
+
+        html.skip-intro,
+        html.skip-intro body {
+            background-color: transparent;
+        }
+
+        html.skip-intro #video-1 {
+            display: none;
+        }
+
+        html.skip-intro #photo-screen {
+            opacity: 1;
+            pointer-events: auto;
+            transition: none;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000000;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+        }
+
+        /* main screen */
+        #video-1 {
+            z-index: 1;
+        }
+
+        /* loading screen */
+        #video-2 {
+            z-index: 0;
+            opacity: 0;
+        }
+
+        /* sekai background */
+        #photo-screen {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            background-image: url("sekai.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+
+        #photo-screen.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .content {
+            position: relative;
+            z-index: 4;
+            color: #ffffff;
+        }
+
+        /* element checker */
+        .element-btn {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            z-index: 5;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .element-btn img {
+            display: block;
+            width: 200px;
+            height: auto;
+        }
+
+        .element-btn:hover {
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        /* meet creator */
+        .creator-btn {
+            position: absolute;
+            top: calc(50vh + 197px);
+            left: calc(50vw - 208px);
+            transform: translate(-50%, -50%);
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            z-index: 5;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .creator-btn img {
+            display: block;
+            width: 260px;
+            height: auto;
+        }
+
+        .creator-btn:hover {
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        /* club members */
+        .club-btn {
+            position: absolute;
+            top: calc(50vh + 193px);
+            left: calc(50vw + 210px);
+            transform: translate(-50%, -50%);
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            z-index: 5;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .club-btn img {
+            display: block;
+            width: 260px;
+            height: auto;
+        }
+
+        .club-btn:hover {
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        /* back to intro */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            filter: drop-shadow(0px 6px 12px #001a4d);
+        }
+
+        .back-button img {
+            display: block;
+            width: 80px;
+            height: auto;
+        }
+
+        .back-button:hover {
+            transform: scale(1.08);
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div class="hero">
+        <!-- main screen -->
+        <video id="video-1" class="bg-video" autoplay muted loop playsinline poster="fallback.jpg">
+            <source src="main_screen.mp4" type="video/mp4" />
+        </video>
+
+        <!-- loading screen -->
+        <video id="video-2" class="bg-video" muted playsinline preload="auto">
+            <source src="loading_screen.mp4" type="video/mp4" />
+        </video>
+
+        <!-- sekai word -->
+        <div id="photo-screen">
+            <button id="intro-back-btn" class="back-button" type="button">
+                <img src="back-arrow.png" alt="Back to Intro" />
+            </button>
+
+            <button id="my-element-btn" class="element-btn" type="button">
+                <img src="element_checker_btn.png" alt="Button" />
+            </button>
+
+            <button id="meet-creator-btn" class="creator-btn" type="button">
+                <img src="meet_creator_btn.png" alt="Meet Creator" />
+            </button>
+
+            <button id="club-members-btn" class="club-btn" type="button">
+                <img src="club_members_btn.png" alt="Club Members" />
+            </button>
+        </div>
+
+        <!-- bg music -->
+        <audio id="bg-audio" loop>
+            <source src="music.mp3" type="audio/mpeg" />
+        </audio>
+    </div>
+
+    <script>
+    const video1 = document.getElementById("video-1");
+    const video2 = document.getElementById("video-2");
+    const photoScreen = document.getElementById("photo-screen");
+    const audio = document.getElementById("bg-audio");
+
+    audio.volume = 0.2;
+    let hasInteracted = false;
+
+    const SKIP_MUSIC_TO = 30;
+
+    if (window.location.search.includes("skip=1")) {
+        hasInteracted = true;
+        video1.pause();
+        photoScreen.style.transition = "none";
+        photoScreen.classList.add("active");
+
+        const setAudioTimestamp = () => {
+            audio.currentTime = SKIP_MUSIC_TO;
+        };
+
+        if (audio.readyState >= 1) {
+            setAudioTimestamp();
+        } else {
+            audio.addEventListener("loadedmetadata", setAudioTimestamp, { once: true });
+        }
+    }
+
+    // autoplay
+    window.addEventListener("load", () => {
+        audio.play().catch(() => {});
+    });
+
+    // Click to start audio and switch to leading screen
+    document.addEventListener("click", () => {
+        audio.play().catch(() => {}); // Ensures music starts even when videos were skipped
+
+        if (hasInteracted) return;
+        hasInteracted = true;
+
+        video2.currentTime = 0;
+        video2.play().then(() => {
+            video2.style.zIndex = "2";
+            video2.style.opacity = "1";
+            video1.pause();
+        });
+    });
+
+    /* Reveal the full-screen photo immediately when Video 2 finishes */
+    video2.addEventListener("ended", () => {
+        photoScreen.classList.add("active");
+    });
+
+    const introBackBtn = document.getElementById("intro-back-btn");
+
+    introBackBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevents the screen-click transition immediately
+
+        // Restart the bg music
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+
+        // Hide the photo screen and loading screen
+        photoScreen.style.transition = "opacity 0.5s ease";
+        photoScreen.classList.remove("active");
+        video2.style.opacity = "0";
+        video2.style.zIndex = "0";
+        video2.pause();
+
+        // Bring back and play main screen
+        video1.style.display = "block";
+        video1.currentTime = 0;
+        video1.play();
+
+        hasInteracted = false;
+    });
+
+    /* go to element checker */
+    const photoBtn = document.getElementById("my-element-btn");
+
+        photoBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevents triggering the bg screen click
+            window.location.href = "element_checker.html";
+        });
+
+    /* go to meet the creator */
+    const creatorBtn = document.getElementById("meet-creator-btn");
+
+        creatorBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevents triggering the bg screen click
+            window.location.href = "meet_creator.html";
+        });
+
+    /* go to club members */
+    const clubBtn = document.getElementById("club-members-btn");
+
+        clubBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevents triggering the bg screen click
+            window.location.href = "club_members.html";
+        });  
+
+
+    </script>
+
+</body>
+
+
+</html>

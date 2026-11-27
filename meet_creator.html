@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Preload sekai.png so returning to index.html has no flash -->
+    <link rel="prefetch" href="sekai.png">
+
+    <title>Meet the Creator</title>
+
+    <link rel="icon" type="image/x-icon" href="logo.png">
+
+    <style>
+        /* fade back to index */
+        @view-transition {
+            navigation: auto;
+        }
+
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.3s;
+        }
+
+        html, body {
+            background-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #f9e3b8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('meet_creator_bg.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        main {
+            background: rgba(86, 56, 139, 0.78);
+            padding: 32px;
+            border-radius: 14px;
+            width: 420px;
+            max-width: 90vw;
+            text-align: center;
+            border: 3px solid #6f4275;
+            box-shadow: 0 0 22px #f9e3b8;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #f9e3b8;
+            margin: 5px 0;
+            text-shadow: 0 0 12px #20173e;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: #e6d6ff;
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .info-box {
+            background: rgba(32, 23, 62, 0.65);
+            border: 2px solid #7d56a8;
+            border-radius: 10px;
+            padding: 15px 18px;
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .info-box p {
+            margin: 8px 0;
+            font-size: 0.98rem;
+            color: #ffffff;
+            line-height: 1.45;
+        }
+
+        .info-box strong {
+            color: #f9e3b8;
+        }
+
+        .bio {
+            font-size: 0.95rem;
+            color: #f3e9ff;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            display: block;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0px 6px 12px #001a4d);
+        }
+
+        .back-button img {
+            display: block;
+            width: 80px;
+            height: auto;
+        }
+
+        .back-button:hover {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <img src="logo.png" alt="Creator Picture" class="avatar">
+
+        <h1>Meet the Creator</h1>
+        <p class="subtitle">Margaux De Guzman | 10 Emerald</p>
+
+        <div class="info-box">
+            <p><strong>Nickname:</strong> Margo</p>
+            <p><strong>Birthday:</strong> September 24, 2011</p>
+            <p><strong>Hobbies:</strong> Voice Acting, Singing, Dancing, Drawing</p>
+            <p><strong>Favorite Subject:</strong> Mathematics</p>
+        </div>
+
+        <p class="bio">
+            My favorite hobby in this whole wide whole is Voice Acting. 
+            I've been doing it since I was 11 years old. 
+            My dream is to be a full-time (Voice) Actress when I grow up.
+    </main>
+
+    <a href="index.html?skip=1" class="back-button">
+        <img src="back-arrow.png" alt="Back" />
+    </a>
+
+</body>
+</html>
