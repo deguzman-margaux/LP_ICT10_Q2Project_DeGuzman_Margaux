@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.7.3/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2026.7.3/core.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+   
+    <title>Quarter 2 Seatwork 1</title>
+
+    <link rel="icon" type="image/x-icon" href="logo.png">
+
+    <style>
+        html, body {
+            background-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #20173e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('club_members_bg.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            color: #20173e;
+            margin-bottom: 5px;
+            /* found on google */
+            text-shadow: 0 0 12px #f9e3b8;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #4a3078;
+            /* found on google */
+            text-shadow: 0 0 12px #f9e3b8;
+        }
+
+        main {
+            background: rgba(86, 56, 139, 0.7);
+            padding: 30px;
+            border-radius: 14px;
+            width: 380px;
+            text-align: center;
+            /* found on google */
+            border: 3px solid #56388b; 
+            box-shadow: 0 0 20px #56388b; 
+        }
+
+        form {
+            padding: 5px;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 12px 14px;
+            margin: 10px 0;
+            border: 2px solid #56388b;
+            border-radius: 6px;
+            font-size: 15px;
+            background: #4a3078;
+            color: white;
+        }
+
+        input[type="text"]::placeholder {
+            color: #d1c4e9;
+        }
+
+        input[type="text"]:focus {
+            border-color: #f9e3b8;
+            outline: none;
+        }
+
+        input[type="button"] {
+            background-color: #433378;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            margin-top: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            /* found on google */
+            box-shadow: 0 0 15px #f9e3b8;
+            transition: all 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background-color: #20173e;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 15px;
+            color: #f9e3b8;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;    /* Distance from top edge */
+            left: 20px;   /* Distance from left edge */
+            z-index: 10;
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            display: block;
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0px 6px 12px #001a4d); /* Dark blue shadow */
+        }
+
+        .back-button img {
+            display: block;
+            width: 80px;  /* Adjust this number to resize your back button image */
+            height: auto;
+        }
+
+        .back-button:hover {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+    <header>
+
+    </header>
+
+    <main>
+        <div class="reactor">
+            <img src="logo.png" alt="logo" height="100px" class="rounded">
+        </div>
+        <h1>Robotics Club</h1>
+        <p>This club is the best</p>
+        <form>
+            <input type="text" id="first_name" placeholder="Enter your First Name"><br>
+            <input type="text" id="last_name" placeholder="Enter your Last Name"><br>
+            <input type="button" py-click="candidate_checker" value="Enter">
+        </form>
+        <div id="result"></div>
+    </main>
+
+    <a href="index.html?skip=1" class="back-button">
+        <img src="back-arrow.png" alt="Back" />
+    </a>
+
+    <py-script src="club_members.py"></py-script>
+</body>
+</html>
