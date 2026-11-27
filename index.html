@@ -314,6 +314,10 @@
     introBackBtn.addEventListener("click", (e) => {
         e.stopPropagation(); // Prevents the screen-click transition immediately
 
+        if (window.location.href.includes("?skip=1")) {
+            window.location.replace("/index.html");
+        }
+
         // Restart the bg music
         audio.currentTime = 0;
         audio.play().catch(() => {});
